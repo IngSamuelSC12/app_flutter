@@ -1,0 +1,54 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin" // Flutter plugin
+    id "com.google.gms.google-services"   // Google Services plugin
+}
+
+android {
+    namespace = "com.example.learnify"  // Definir el namespace aquí
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.learnify"  // Identificador único de la aplicación
+        minSdkVersion 23  // Cambiar de flutter.minSdkVersion a 23
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutter.versionCode
+        versionName flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug // Debug signing config for release builds
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    // Import the Firebase BoM (Bill of Materials)
+    implementation platform("com.google.firebase:firebase-bom:33.6.0")
+
+    // Firebase Analytics
+    implementation "com.google.firebase:firebase-analytics"
+
+    // Add additional Firebase products if needed
+    // Example:
+    // implementation "com.google.firebase:firebase-auth"
+    // implementation "com.google.firebase:firebase-firestore"
+}
+
+apply plugin: 'com.google.gms.google-services'  // Aplica el plugin al final
